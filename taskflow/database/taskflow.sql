@@ -1,7 +1,30 @@
 CREATE DATABASE IF NOT EXISTS taskflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; USE taskflow;
 DROP TABLE IF EXISTS chamados; DROP TABLE IF EXISTS tarefas;
-CREATE TABLE tarefas(id INT AUTO_INCREMENT PRIMARY KEY,titulo VARCHAR(120) NOT NULL,descricao TEXT,responsavel VARCHAR(100) NOT NULL,categoria VARCHAR(60) NOT NULL DEFAULT 'Geral',prazo DATE NOT NULL,prioridade ENUM('Baixa','Média','Alta') NOT NULL DEFAULT 'Média',status ENUM('Pendente','Em andamento','Concluída') NOT NULL DEFAULT 'Pendente',criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
-CREATE TABLE chamados(id INT AUTO_INCREMENT PRIMARY KEY,codigo VARCHAR(20) UNIQUE NOT NULL,titulo VARCHAR(160) NOT NULL,modulo VARCHAR(60) NOT NULL,resumo VARCHAR(255) NOT NULL,descricao TEXT NOT NULL,esperado TEXT NOT NULL,obtido TEXT NOT NULL,severidade ENUM('Baixa','Média','Alta','Crítica') NOT NULL,prioridade ENUM('Baixa','Média','Alta','Urgente') NOT NULL,status ENUM('Aberto','Resolvido') NOT NULL DEFAULT 'Aberto',causa TEXT,correcao TEXT,arquivo VARCHAR(255),resultado VARCHAR(60),testes TEXT,criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,fechado_em DATETIME NULL);
+CREATE TABLE tarefas(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(120) NOT NULL,
+    descricao TEXT,responsavel VARCHAR(100) NOT NULL,
+    categoria VARCHAR(60) NOT NULL DEFAULT 'Geral',
+    prazo DATE NOT NULL,
+    prioridade ENUM('Baixa','Média','Alta') NOT NULL DEFAULT 'Média',
+    status ENUM('Pendente','Em andamento','Concluída') NOT NULL DEFAULT 'Pendente',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE chamados(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(20) UNIQUE NOT NULL,
+    titulo VARCHAR(160) NOT NULL,
+    modulo VARCHAR(60) NOT NULL,
+    resumo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    esperado TEXT NOT NULL,
+    obtido TEXT NOT NULL,
+    severidade ENUM('Baixa','Média','Alta','Crítica') NOT NULL,
+    prioridade ENUM('Baixa','Média','Alta','Urgente') NOT NULL,
+    status ENUM('Aberto','Resolvido') NOT NULL DEFAULT 'Aberto',
+    causa TEXT,correcao TEXT,arquivo VARCHAR(255),
+    resultado VARCHAR(60),
+    testes TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,fechado_em DATETIME NULL);
 INSERT INTO tarefas(titulo,descricao,responsavel,categoria,prazo,prioridade,status) VALUES
 ('Revisar tela inicial','Conferir textos e atalhos.','Marina','Desenvolvimento',DATE_ADD(CURDATE(),INTERVAL 2 DAY),'Média','Em andamento'),('Atualizar documentação','Revisar guia.','Rafael','Documentação',DATE_ADD(CURDATE(),INTERVAL 4 DAY),'Baixa','Pendente'),('Validar formulário','Testar campos.','Bianca','Qualidade',DATE_ADD(CURDATE(),INTERVAL 1 DAY),'Alta','Em andamento'),('Organizar categorias','Padronizar categorias.','Lucas','Organização',DATE_ADD(CURDATE(),INTERVAL 5 DAY),'Baixa','Concluída'),('Preparar relatório','Consolidar atividades.','Ana','Documentação',DATE_ADD(CURDATE(),INTERVAL 3 DAY),'Alta','Pendente'),('Revisar permissões','Verificar acesso.','Pedro','Suporte',DATE_ADD(CURDATE(),INTERVAL 6 DAY),'Média','Concluída');
 INSERT INTO chamados(codigo,titulo,modulo,resumo,descricao,esperado,obtido,severidade,prioridade) VALUES
